@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        user-output-message:
+          destination: user-messages-topic
+          content-type: application/json
+
+        user-input-message:
+          destination: user-messages-topic
+          content-type: applicaiton/json
+          group: sample
+      kafka:
+        binder:
+          brokers: localhost:9092

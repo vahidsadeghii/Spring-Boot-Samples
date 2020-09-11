@@ -1,0 +1,15 @@
+/lsp/
+/.vscode/
+/.settings/
+/.idea/
+/.gradle/
+/bin/
+/build/
+/kafkastream/.classpath
+/.classpath
+/kafkastream/.project
+/.project
+/kafkastream/.gradle/6.4.1/executionHistory/executionHistory.lock
+/kafkastream/.gradle/6.4.1/gc.properties
+/kafkastream/.gradle/6.4.1/fileChanges/last-build.bin
+/kafkastream/.settings/org.eclipse.buildship.core.prefs

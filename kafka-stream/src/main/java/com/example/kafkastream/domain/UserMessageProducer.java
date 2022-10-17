@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserMessage {
+public class UserMessageProducer {
+    private int sentCount;
     private String message;
 }

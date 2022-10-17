@@ -11,8 +11,20 @@ spring:
 
         user-input-message:
           destination: user-messages-topic
+          content-type: application/json
+          group: sample
+
+        user-input-message-dlq:
+          destination: user-messages-dlq-topic
           content-type: applicaiton/json
           group: sample
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: 192.168.0.107:9092
+        bindings:
+          user-input-message:
+            consumer:
+              maxAttempts: 2
+              enableDlq: true
+              dlqName: user-messages-dlq-topic
+              dlqPartitions: 1

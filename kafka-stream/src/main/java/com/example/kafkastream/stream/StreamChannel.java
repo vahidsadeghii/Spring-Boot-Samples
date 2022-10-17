@@ -10,4 +10,7 @@ public interface StreamChannel {
 
     @Input(value = "user-input-message")
     MessageChannel userInputMessageChannel();
+
+    @Input(value = "user-input-message-dlq")
+    MessageChannel userInputMessageDLQChannel();
 }

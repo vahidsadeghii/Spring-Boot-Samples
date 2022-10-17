@@ -1,9 +1,9 @@
 package com.example.kafkastream.service;
 
-import com.example.kafkastream.domain.UserMessage;
+import com.example.kafkastream.domain.UserMessageConsumer;
 
 public interface UserMessageService {
     void sendUserMessage(String message);
 
-    void processReceivedMessage(UserMessage message);
+    void processReceivedMessage(UserMessageConsumer message);
 }

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.example.kafkaprotobuf.proto;
+
+option java_package = "com.example.kafkaprotobuf.proto";
+option java_outer_classname = "MessageProto";
+
+message Message {
+  uint32 id = 1;
+  string message = 2;
+  string subject = 3;
+}

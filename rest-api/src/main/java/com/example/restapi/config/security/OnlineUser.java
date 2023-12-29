@@ -56,8 +56,4 @@ public class OnlineUser implements UserDetails {
         return true;
     }
 
-    public List<String> getRoles() {
-        return this.roles;
-    }
-
 }

@@ -35,8 +35,6 @@ import reactor.core.publisher.Mono;
 import java.util.Collections;
 
 @SpringBootApplication
-@EnableWebFluxSecurity
-@EnableReactiveMethodSecurity
 public class SpringWebfluxApplication {
 
     public static void main(String[] args) {
@@ -46,6 +44,7 @@ public class SpringWebfluxApplication {
     @RestController
     public static class Controller extends BaseController {
         @GetMapping(value = "/open/token")
+//        @PreAuthorize("hasAuthority('auth_payment')")
         public Mono<String> handle(ServerWebExchange request) {
 //            System.out.println(onlineUser.value);
 
@@ -75,51 +74,31 @@ public class SpringWebfluxApplication {
         }
     }
 
-    @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
-        return httpSecurity.authorizeExchange(
-                        authorizeExchangeSpec -> {
-                            authorizeExchangeSpec
-                                    .pathMatchers("/api/**").authenticated()
-                                    .anyExchange().permitAll();
-                        }
-                ).httpBasic(
-                        httpBasicSpec -> {
-                            httpBasicSpec.disable();
-                            httpBasicSpec.authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED));
-                        }
-                )
-                .formLogin(
-                        formLoginSpec -> {
-                            formLoginSpec.disable();
-                            formLoginSpec.authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED));
-                        }
-                )
-                .addFilterBefore(new SecurityWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
-                .csrf(
-                        ServerHttpSecurity.CsrfSpec::disable
-                )
-                .build();
-    }
 
     @Component
     public static class SecurityWebFilter implements WebFilter {
         @Override
         public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-            OnlineUser onlineUser = new OnlineUser(RandomUtils.nextInt() + "");
 
-            exchange.getAttributes().put("onlineUser", onlineUser);
-            return chain.filter(exchange).contextWrite(
-                    ReactiveSecurityContextHolder.withAuthentication(
-                            new UsernamePasswordAuthenticationToken(onlineUser, null,
-                                    Collections.singleton(new SimpleGrantedAuthority("auth_payment")))
-                    )
-            );
+            if (exchange.getRequest().getHeaders().containsKey("TokenInfo")) {
+                OnlineUser onlineUser = new OnlineUser(RandomUtils.nextInt() + "");
+
+                exchange.getAttributes().put("onlineUser", onlineUser);
+                return chain.filter(exchange).contextWrite(
+                        ReactiveSecurityContextHolder.withAuthentication(
+                                new UsernamePasswordAuthenticationToken(onlineUser, null,
+                                        Collections.singleton(new SimpleGrantedAuthority("auth_payment")))
+                        )
+                );
+            } else {
+                return chain.filter(exchange);
+            }
         }
     }
 
     public static class OnlineUser {
         String id;
+
         public OnlineUser(String id) {
             this.id = id;
         }

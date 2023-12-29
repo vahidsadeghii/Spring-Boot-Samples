@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.io.ByteArrayInputStream;
+import java.util.Arrays;
+import java.util.Collections;
+
 @Configuration
 public class RouteConfig {
     @Autowired
@@ -28,6 +32,11 @@ public class RouteConfig {
                                                     "X-Custom", value
                                             );
                                         })
+                                        .map(
+                                                s -> {
+                                                    return 10;
+                                                }
+                                        )
                                         .then(
                                                 chain.filter(exchange)
                                         );
@@ -35,6 +44,7 @@ public class RouteConfig {
                         return chain.filter(exchange);
                     }
                 };
+        byte[] a = new byte[10];
         return routeLocatorBuilder.routes()
                 .route("wallet",
                         r -> r.path("/payment/**")

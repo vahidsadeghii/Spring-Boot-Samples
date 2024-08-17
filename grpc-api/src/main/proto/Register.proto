@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.example.grpcapi.proto;
+
+option java_package = "com.example.grpcapi.proto";
+option java_outer_classname = "RegisterProto";
+option java_multiple_files = true;
+
+message RegisterResponse {
+  int32 id = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
+service RegisterService {
+  rpc registerUser(RegisterRequest) returns (RegisterResponse){}
+}

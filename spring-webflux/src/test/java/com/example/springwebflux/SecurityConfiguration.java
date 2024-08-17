@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                             formLoginSpec.authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED));
                         }
                 )
-                .addFilterBefore(new SpringWebfluxApplication.SecurityWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
+                .addFilterBefore(new SecurityWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
                 .csrf(
                         ServerHttpSecurity.CsrfSpec::disable
                 )

@@ -12,7 +12,9 @@ java {
 }
 
 repositories {
-    mavenCentral()
+    maven {
+        url "https://repo.mofid.dev/artifactory/mcab-maven/"
+    }
 }
 
 ext {
@@ -31,6 +33,8 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
+
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.4")
 }
 
 tasks.named('test') {

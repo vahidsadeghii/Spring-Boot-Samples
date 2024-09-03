@@ -1,0 +1,1 @@
+insert into city(id, detail) values (1, 'Tehran');

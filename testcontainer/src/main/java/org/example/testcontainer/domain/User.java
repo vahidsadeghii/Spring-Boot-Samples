@@ -13,7 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String title;
-
+    private boolean isActive;
     public User(){}
 
     public User(long id, String title) {
@@ -35,5 +35,13 @@ public class User {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

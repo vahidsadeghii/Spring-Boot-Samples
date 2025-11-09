@@ -21,16 +21,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .httpBasic(Customizer.withDefaults())
                 .sessionManagement(
                         httpSecuritySessionManagementConfigurer -> {
                             httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
                             httpSecuritySessionManagementConfigurer.maximumSessions(1);
                         }
                 )
-                .addFilterBefore(
-                        new SessionFilter(), AuthorizationFilter.class
-                )
+//                .addFilterBefore(
+//                        new SessionFilter(), AuthorizationFilter.class
+//                )
                 .authorizeHttpRequests(
                         authorizationManagerRequestMatcherRegistry -> {
                             authorizationManagerRequestMatcherRegistry.requestMatchers(

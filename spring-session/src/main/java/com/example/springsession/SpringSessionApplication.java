@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class SpringSessionApplication {
 
     public static void main(String[] args) {
@@ -39,7 +41,7 @@ public class SpringSessionApplication {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                     UsernamePasswordAuthenticationToken.authenticated(
                             new OnlineUser("username", "password"), null,
-                            List.of(new SimpleGrantedAuthority("transactions"), new SimpleGrantedAuthority("profile"))
+                            List.of(new SimpleGrantedAuthority("transactions"))
                     );
 
 

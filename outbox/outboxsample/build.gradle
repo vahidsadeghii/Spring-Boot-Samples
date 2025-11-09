@@ -1,0 +1,49 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.7'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.flywaydb.flyway' version '11.1.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.kafka:spring-kafka'
+	
+	// Flyway for database migrations
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-sqlserver'
+
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testRuntimeOnly 'com.h2database:h2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+// Flyway configuration for Gradle plugin
+ flyway {
+ 	url = 'jdbc:sqlserver://10.1.16.33:1433;databaseName=vahid;encrypt=false;trustServerCertificate=true'
+ 	user = System.getProperty('FLYWAY_USER', System.getProperty('DB_USERNAME', 'vahid'))
+ 	password = System.getProperty('FLYWAY_PASSWORD', System.getProperty('DB_PASSWORD', 'vahid!123'))
+ 	locations = ['classpath:db/migration']
+ }
+ 

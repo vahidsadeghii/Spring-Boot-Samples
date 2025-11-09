@@ -1,9 +1,11 @@
 package com.example.restapi.controller.create;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-class CreateNewTalkRequest {
+@Setter
+public class CreateNewTalkRequest {
     private String title;
     private String author;
     private String scheduleDate;

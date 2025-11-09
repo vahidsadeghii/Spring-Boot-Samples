@@ -1,0 +1,8 @@
+pluginManagement {
+    repositories {
+        maven {
+            url "https://repo.mofid.dev/artifactory/gradle-plugins/"
+        }
+    }
+}
+rootProject.name = 'kafka-protobuf'

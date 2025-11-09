@@ -1,0 +1,1 @@
+insert into user_(id, title, is_active) values (1, 'vahid', true);

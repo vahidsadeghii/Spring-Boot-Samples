@@ -1,1 +1,8 @@
 /multipart-request/lsp/conf/properties.json
+/.idea/.gitignore
+/.idea/google-java-format.xml
+/.idea/jpa-buddy.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/SpringBootExamples.iml
+/.idea/vcs.xml

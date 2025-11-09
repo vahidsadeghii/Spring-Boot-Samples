@@ -46,11 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @RequestScope
-    public UserDetails userDetails() {
+    public OnlineUser userDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.getPrincipal() != null) {
-            return (UserDetails) authentication.getPrincipal();
+        if (authentication != null && authentication.getPrincipal() != null && authentication.getPrincipal() instanceof OnlineUser) {
+            return (OnlineUser) authentication.getPrincipal();
 
         } else return null;
     }
